@@ -1,0 +1,117 @@
+/* TAGS */
+
+html, body {
+    height: 100%;
+    width: 100%;
+    background-color: rgb(240, 239, 239);
+    padding: 0;
+    margin: 0;
+}
+
+hr { 
+    width: 50%;
+    border-top-width: 4px;
+    color: white;
+    margin: 1.5rem auto;
+}
+
+h5 {
+    color:white;
+    font-weight: 400;
+}
+
+/* CLASSES */
+.header-img {
+     width: 75%;
+
+}
+
+.round-btn {
+    border-radius: 1rem;
+    font-size: 1.4rem;
+}
+
+.modal-content {
+    border-radius: 1.5rem;
+}
+
+.round-input {
+    border-radius: 4rem;
+}
+
+.login-btn {
+    border-color: #58C6F0; 
+    background-color: #58C6F0; 
+    font-size: 1.1rem;
+}
+
+.choice-img {
+    width: 100%;
+    border-radius: 5rem;
+    opacity: 0.8;
+    cursor: pointer;
+    margin-bottom: 3rem;
+}
+
+
+.zoom img{
+    transition: transform .5s;
+}
+
+.zoom:hover img{
+    transform: scale(1.1);
+    opacity: 1;
+}
+
+.error {
+
+   background: #F2DEDE;
+   color: #0c0101;
+   padding: 10px;
+   width: 95%;
+   border-radius: 5px;
+   margin: 20px auto;
+
+}
+
+/* NAVIGATION BAR */
+
+.navbar {
+    padding-bottom: 4.5rem;
+}
+
+.navbar-brand {
+    font-size: 2.7rem;
+    font-weight: bold;
+}
+
+.nav-item {
+    padding: 0 18px;
+    cursor: pointer;
+}
+
+.nav-link {
+    font-size: 1.25rem;
+}
+
+/* IDs */
+
+#header {
+    background-color: rgba(88, 167, 240, 255); 
+    padding: 2.25rem;  
+    background-image: linear-gradient(#1F2F98, #2EAAFA);
+}
+
+#funFact {
+    text-align: center;
+    color: grey;
+}
+
+#contact {
+    background-color: #2EAAFA;
+    /* background-image: linear-gradient(#2EAAFA, #1f5798); */
+}
+
+#login-modal {
+    cursor: auto;
+}

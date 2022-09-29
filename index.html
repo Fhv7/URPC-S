@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Lista</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <link href="css/styles.css" rel="stylesheet">
+    
+</head>
+
+<body>
+    <!-- Cabecera -->
+    <section id="header">     
+        <div class="container">
+
+            <!-- Navbar -->{}
+            <nav class="navbar navbar-expand-xl navbar-dark pt-5">
+                <a class="navbar-brand" href="#">URPC'S</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link px-4" onClick="goTo('motivations')">Motivaciones</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link px-4" onClick="goTo('carousel')">Componentes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link px-4" onClick="goTo('manual')">Manual</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link px-4" onClick="goTo('contact')">Contacto</a>
+                        </li>
+                        <li class="nav-item">
+                            <button type="button" class="btn btn-dark round-btn nav-link px-4" style="color: white" data-bs-toggle="modal" data-bs-target="#login-modal"> Iniciar Sesión </button>
+
+                            <!-- Login Modal -->
+                            <div class="modal fade" id="login-modal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+
+                                        <div class="modal-header text-center">
+                                            <h3 class="modal-title w-100 font-weight-bold mt-4 mb-2" id="loginModalLabel">Iniciar Sesión</h3>
+                                        </div>
+
+                                        <div class="modal-body" novalidate>
+                                            <form name="loginForm" method="post" action="login.php">
+                                                <div class="form-floating mx-5 my-4">
+                                                    <input type="email" name="emailLoginField" id="emailLoginField" class="form-control validate round-input ps-4" placeholder="example@mail.com" style="border-color: #58C6F0; ">
+                                                    <label class="ps-4" data-error="wrong" data-success="right" for="emailLoginField">Correo Electrónico</label>
+                                                </div>
+                                                <div class="form-floating mx-5 mb-3">
+                                                    <input type="password" name="passLoginField" id="passLoginField" class="form-control validate round-input ps-4" placeholder="Password" style="border-color: #58C6F0;">
+                                                    <label class="ps-4" data-error="wrong" data-success="right" for="passLoginField">Contraseña</label>
+                                                </div>
+                                                <div class="container text-center mt-5">
+                                                    <button type="submit" class="btn btn-dark btn-lg round-btn login-btn mb-5" onclick="validateLogin()">Iniciar Sesión</button>
+                                                </div>
+                                            </form>
+                                            <div class="container text-center mb-3">
+                                                <button type="button" class="btn btn-link">¿Olvidaste tu Contraseña?</button>
+                                            </div>
+                                            <!-- <?php if (isset($_GET['error'])) { ?>
+                                                <p class="error"><?php echo $_GET['error']; ?></p>
+                                            <?php } ?> -->
+                                        </div>
+
+                                        <div class="modal-footer d-flex justify-content-center">
+                                            ¿No tienes una cuenta? <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#register-modal">Crea una.</button>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Register Modal -->
+                            <div class="modal fade" id="register-modal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+
+                                        <div class="modal-header text-center">
+                                            <h3 class="modal-title w-100 font-weight-bold mt-4 mb-2" id="registerModalLabel">Registrarse</h3>
+                                        </div>
+
+                                        <div class="modal-body">
+                                            <form name="registerForm" method="post" action="register.php"> 
+                                                <div class="form-floating mx-5 my-4">
+                                                    <i class="fas fa-envelope prefix grey-text"></i>
+                                                    <input type="text" name="nameRegField" id="nameRegField" class="form-control validate round-input ps-4" placeholder="Nombre" style="border-color: #58C6F0; ">
+                                                    <label class="ps-4" data-error="wrong" data-success="right" for="emailField">Nombre</label>
+                                                </div>
+                                                <div class="form-floating mx-5 mb-4">
+                                                    <i class="fas fa-envelope prefix grey-text"></i>
+                                                    <input type="email" name="emailRegField"id="emailRegField" class="form-control validate round-input ps-4" placeholder="example@mail.com" style="border-color: #58C6F0; ">
+                                                    <label class="ps-4" data-error="wrong" data-success="right" for="emailRegField">Correo Electrónico</label>
+                                                </div>
+                                                <div class="form-floating mx-5 mb-4">
+                                                    <i class="fas fa-lock prefix grey-text"></i>
+                                                    <input type="password" name="passRegField" id="passRegField" class="form-control validate round-input ps-4" placeholder="Password" style="border-color: #58C6F0;">
+                                                    <label class="ps-4" data-error="wrong" data-success="right" for="passRegField">Contraseña</label>
+                                                </div>
+                                                <div class="form-floating mx-5 mb-3">
+                                                    <i class="fas fa-lock prefix grey-text"></i>
+                                                    <input type="password" name="pass2RegField" id="pass2RegField" class="form-control validate round-input ps-4" placeholder="Password" style="border-color: #58C6F0;">
+                                                    <label class="ps-4" data-error="wrong" data-success="right" for="pass2RegField">Repetir Contraseña</label>
+                                                </div>
+                                                <div class="container text-center mt-5">
+                                                    <button type="submit" class="btn btn-dark btn-lg round-btn login-btn mb-5">Registrarme</button>
+                                                </div>
+                                            </form>
+                                            <div class="container text-center mb-3">
+
+                                                <input class="form-check-input" type="checkbox" id="checkboxNoLabel" style="margin-top: 0.75rem">
+                                                <button type="button" class="btn btn-link">Acepto Terminos y Condiciones</button>
+                                            </div>
+                                        </div>
+
+                                        <div class="modal-footer d-flex justify-content-center mb-3">
+                                            <h6 style="color: grey">¿Sabias que...?</h6>
+                                            <br>
+                                            <p id="funFact" class="px-5"></p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Contenido -->
+            <div class ="row justify-content-between" style="padding: 5rem 0 6rem 0">
+                <div class="col-lg-6 text-lg-start text-center pb-5 mb-5" style="color:white">
+                    <h1 style="font-size:3.3rem; font-weight: bold">Lorem Ipsum</h1>
+                    <p  style="margin-bottom: 3rem; text-align:justify; font-size:1.3rem" >
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim 
+                        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea 
+                        commodo consequat.
+                    </p>
+                    <button type="button" class="btn btn-light btn-lg round-btn" style="margin-right: 1rem" data-bs-toggle="modal" data-bs-target="#register-modal" onclick="getFact()"> Registrarse </button>
+
+                    <button type="button" class="btn btn-dark btn-lg round-btn" data-bs-toggle="modal" data-bs-target="#login-modal"> Iniciar Sesión </button>
+                </div>
+                <div class="col-lg-6 text-lg-end text-sm-center text-center">
+                    <img src="assets/computer4.png" class="ms-auto header-img" alt="computer.png">
+                </div>
+            </div> 
+        </div>   
+
+    </section>
+
+    <!-- Motivaciones -->
+    <section id="motivations">
+        <div style="height: 500px" class="d-flex align-items-center justify-content-center">
+            <h1 > Motivaciones </h1>
+        </div>
+    </section>
+    
+    <!-- Carrusel de Componentes -->
+    <section id="carousel">
+        <div style="background-color: rgb(211, 211, 211); height: 500px">
+            <div id="carouselExampleIndicators" class="carousel slide h-100" data-bs-ride="true" >
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"
+                    aria-label="Slide 4"></button>
+                    <!-- <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="last+1"
+                    aria-label="Slide n"></button> -->
+                </div>
+                <div class="carousel-inner" >
+                    <div class="carousel-item mt-5 active">
+                        <div class="row justify-content-center align-items-center g-2" >
+                            <div class="col-lg-6" align="end" width="330rem">
+                                <div class="container">
+                                    <img src="assets/cpu.webp" class="img-fluid" alt="cpu">
+                                </div>
+                            </div>
+                            <div class="col-lg-6" align="start" style="padding-right: 17rem; padding-left: 6rem">
+                                <h1>CPU (Procesador)</h1>
+                                <br>
+                                <p>El "cerebro" del computador. Se responsabiliza de ejecutar procesos,
+                                    establecer conexiones y realizar calculos para mantener el sistema en orden.</p>
+                                
+                                <p>Para saber qué tipo de CPU escoger, hay que prestar atención a 2 variables:</p>
+                                <p><b>- Número de nucleos:</b> A mayor cantidad de nucleos, mayor será la cantidad de procesos que se podrán ejecutar a la vez.</p>
+                                <p><b>- Frecuencia:</b> A mayor frecuencia, mayor será la velocidad con la que se ejecute cada proceso.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item mt-5 ">
+                        <div class="row justify-content-center align-items-center g-2">
+                            <div class="col-lg-6" align="end">
+                                <div class="container">
+                                    <img src="assets/mb2.png" class="img-fluid me-4" alt="motherboard" width="320rem">
+                                </div>
+                            </div>
+                            <div class="col-lg-6" align="start" style="padding-right: 17rem; padding-left: 6rem; padding-bottom: 2.1rem">
+                                <h1>Placa Madre</h1>
+                                <br>
+                                <p>La “columna vertebral” de un ordenador. En la Placa Madre se conectan 
+                                    todos los componentes internos de un computador.</p>
+                                <p>Para elegir una Placa Madre debes considerar:</p>
+                                <p><b>- Que el Chipset sea compatible con tu CPU</b></p>
+                                <p><b>- Que las ranuras de memoria RAM sean compatibles con tus memorias RAM</b></p>
+                                <p><b>- La cantidad máxima de discos duros que admite</b></p>
+                                <p><b>- Que su tamaño sea el adecuado para tu gabinete</b></p>
+                                <p>...etc</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item mt-5">
+                        <div class="row justify-content-center align-items-center g-2">
+                            <div class="col-lg-6" align="end">
+                                <img src="assets/gpu.png" class="img-fluid me-5" alt="gpu" width="420rem">
+                            </div>
+                             <div class="col-lg-6" align="start" style="padding-right: 17rem; padding-left: 6rem">
+                                <h1>GPU (Tarjeta Gráfica)</h1>
+                                <br>
+                                <p>La GPU se encarga de transformar todos los datos que le envía la CPU en información visual. 
+                                    Gracias a ellas podemos ver todas las imágenes que nos muestra el monitor de nuestro ordenador.</p>
+                                <p><b>Al igual que una CPU, la GPU será más potente mientras mayor sea su frecuencia y número de núcleos.</b></p>
+                                <p>Cuando la CPU no es lo suficientemente potente para seguir el ritmo de trabajo de la GPU (o viceversa), 
+                                    se produce un <i><b>cuello de botella</b></i>; el rendimiento del ordenador termina estando muy por debajo de lo que 
+                                    sus componentes prometen.</p>
+                                <p>Para saber si tu CPU y GPU generan <i><b>cuello de botella</b></i>, puedes utilizar 
+                                    <a target="_blank" href="https://pc-builds.com/es/bottleneck-calculator/">esta herramienta</a>.</p>
+                            </div>     
+                        </div>
+                    </div>
+
+                    <div class="carousel-item mt-5">
+                        <div class="row justify-content-center align-items-center g-2">
+                            <div class="col-lg-6" align="end">
+                                <img src="assets/psu.png" class="img-fluid mt-5 me-5" alt="gpu" width="500rem">
+                            </div>
+                            <div class="col-lg-6" align="start" style="padding-right: 17rem; padding-left: 6rem">
+                                <h1>PSU (Fuente de Poder)</h1>
+                                <br>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
+                                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim 
+                                    veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea 
+                                    commodo consequat.
+                                </p>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
+                                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim 
+                                    veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea 
+                                    commodo consequat.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </section>
+    
+    <section id="manual">
+        <div style="height: 500px" class="d-flex align-items-center justify-content-center">
+            <h1 > Manual de Usuario </h1>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div style="height: 150px" class="d-flex align-items-center justify-content-center">
+            <h1 > Contacto </h1>
+        </div>
+    </section>
+    
+    
+    <script src="index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+</body>
+
+</html>
